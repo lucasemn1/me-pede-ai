@@ -1,31 +1,41 @@
-# Adonis fullstack application
+<h1 align="center"> 🖥 Backend do MePede 💽 </h1>
 
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+## 💻 Tecnologias 
+* NodeJS
+* Adonis
+* SQLite3 (em ambiente de desenvolvimento)
 
-1. Bodyparser
-2. Session
-3. Authentication
-4. Web security middleware
-5. CORS
-6. Edge template engine
-7. Lucid ORM
-8. Migrations and seeds
+## ❗Pré-requisitos
+* [Node.JS](https://nodejs.org/en/)
 
-## Setup
-
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick
+## 📝 Instalação
+1. Clone o projeto
+```
+$ git clone https://github.com/lucasemn1/me-pede
 ```
 
-or manually clone the repo and then run `npm install`.
-
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
+2. Instale as dependências
 ```
+$ npm install
+```
+
+3. Instale a biblioteca do sqlite3 (em ambiente de desenvolvimento)
+```
+$ npm install sqlite3
+```
+
+4. Crie um aquivo "**.env**" na pasta "**/backend**", copie o conteúdo do arquivo "**.env.exemple**" e cole no aquivo "**.env**".
+
+5. Gere a key
+```
+$ ?
+```
+
+## 💾 Modelo relacional do banco de dados.
+
+![GitHub Logo](https://raw.githubusercontent.com/lucasemn1/me-pede/master/backend/public/database_model.png)
+
+<hr/>
+
+##### Desenvolvido por Lucas Emanuel Nascimento Nóbrega Dias 😁.
+##### Visite meu [Linkedin! 🌐🗯](https://www.linkedin.com/in/lucas-emn/) 
