@@ -7,6 +7,7 @@
 
 ## ❗Pré-requisitos
 * [Node.JS](https://nodejs.org/en/)
+* [CLI do AdonisJS](https://adonisjs.com/docs/4.1/installation)
 
 ## 📝 Instalação
 1. Clone o projeto
@@ -29,6 +30,11 @@ $ npm install sqlite3
 5. Gere a key
 ```
 $ ?
+```
+
+6. Rode o servidor
+```
+$ adonis serve --dev
 ```
 
 ## 💾 Modelo relacional do banco de dados.
