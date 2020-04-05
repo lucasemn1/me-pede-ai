@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
+const Database = use('Database')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -19,32 +20,14 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-  }
+  async index ({ request, response }) {
+    const users = await User.all()
 
-  /**
-   * Render a form to be used for creating a new user.
-   * GET users/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
+    for( const user of users.rows ){
+      user.adresses = await user.adresses().fetch()
+    }
 
-    const user = new User();
-    user.name = request.body.name
-    user.email = request.body.email
-    user.password = request.body.password
-    user.phone = request.body.phone
-    user.picture = 'default'
-    user.date_of_birth = request.body.dateOfBirth
-
-    console.log(user);
-    const reseult = await user.save()
-
-    return response.json({reseult})
+    return response.json(users)
   }
 
   /**
@@ -56,6 +39,23 @@ class UserController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    const user = new User();
+    user.name = request.body.name
+    user.email = request.body.email
+    user.password = request.body.password
+    user.phone = request.body.phone
+    user.picture = 'default'
+    user.date_of_birth = request.body.dateOfBirth
+    const address = request.body.address
+
+    await user.save()
+
+    if( address ){
+      await user.adresses().create(address)
+      user.adresses = await user.adresses().fetch()
+    }
+
+    return response.json({user})
   }
 
   /**
@@ -68,18 +68,6 @@ class UserController {
    * @param {View} ctx.view
    */
   async show ({ params, request, response, view }) {
-  }
-
-  /**
-   * Render a form to update an existing user.
-   * GET users/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
   }
 
   /**

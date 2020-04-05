@@ -2,6 +2,8 @@
 
 /** @type {import('@adonisjs/framework/src/Hash')} */
 const Hash = use('Hash')
+const Address = use('App/Models/Address')
+
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
@@ -33,6 +35,16 @@ class User extends Model {
    */
   tokens () {
     return this.hasMany('App/Models/Token')
+  }
+
+  adresses() {
+    return this.belongsToMany(
+      Address,
+      'user_id',
+      'address_id',
+      'id',
+      'id'
+    ).pivotTable('adresses_users')
   }
 }
 
