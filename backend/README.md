@@ -20,19 +20,19 @@ $ git clone https://github.com/lucasemn1/me-pede
 $ npm install
 ```
 
-3. Instale a biblioteca do sqlite3 (em ambiente de desenvolvimento)
-```
-$ npm install sqlite3
-```
+3. Crie um aquivo "**.env**" na pasta "**/backend**", copie o conteúdo do arquivo "**.env.exemple**" e cole no aquivo "**.env**".
 
-4. Crie um aquivo "**.env**" na pasta "**/backend**", copie o conteúdo do arquivo "**.env.exemple**" e cole no aquivo "**.env**".
+4. Execute as migrations
+```
+$ adonis migration:run
+```
 
 5. Gere a key
 ```
-$ ?
+$ adonis key:generate
 ```
 
-6. Rode o servidor
+6. Inicie o servidor
 ```
 $ adonis serve --dev
 ```
