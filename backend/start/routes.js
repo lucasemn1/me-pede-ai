@@ -19,3 +19,10 @@ const Route = use('Route')
 Route.on('/').render('welcome')
 Route.post('/users/store', 'UserController.store');
 Route.get('/users', 'UserController.index');
+
+// Route.on('/').render('welcome')
+Route.post('/session/login', 'JwtController.login');
+Route.get('/session/me', 'JwtController.me');
+Route.get('/session/tokens', 'JwtController.listTokens');
+Route.delete('/session/logout', 'JwtController.logout');
+// Route.get('/users', 'UserController.index');
