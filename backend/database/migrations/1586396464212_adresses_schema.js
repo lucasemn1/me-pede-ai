@@ -10,6 +10,7 @@ class AdressesSchema extends Schema {
       table.integer('number').notNullable()
       table.string('complement', 254).notNullable()
       table.string('neighborhood', 254).notNullable()
+      table.string('street', 254).notNullable()
       table.string('city', 100).notNullable()
       table.string('uf', 2).notNullable()
       table.string('country', 50).notNullable()

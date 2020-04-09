@@ -3,7 +3,6 @@
 const Market = use('App/Models/Market')
 const Address = use('App/Models/Address')
 const Category = use('App/Models/Category')
-const Database = use('Database')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -16,6 +15,7 @@ class MarketController {
   /**
    * Create/save a new market.
    * POST markets
+   * Ok, it's working
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -40,6 +40,7 @@ class MarketController {
     address.uf = request.body.address.uf
     address.country = request.body.address.country
     address.cep = request.body.address.cep
+    address.street = request.body.address.street
 
     const categories = {
       categories: request.body.categories,
@@ -58,6 +59,7 @@ class MarketController {
     try{
       await address.save()
       await market.address().associate(address)
+      market.address = address
     }
     catch (err) {
       await market.delete()
@@ -66,7 +68,7 @@ class MarketController {
       })
     }
 
-    //Funcionalidade de likar categorias
+    //Funcionalidade de linkar categorias
     for(const category of categories.categories){
       const categoryRegisted = await Category.query().where('category', category).first()
 
@@ -81,7 +83,8 @@ class MarketController {
 
   /**
    * Display a single market.
-   * GET markets/:id
+   * GET market/show/:id
+   * Ok, it's working
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -90,12 +93,40 @@ class MarketController {
   async show ({ params, request, response }) {
     const market_id = params.id
     const market = await Market.find(market_id)
+
+    if( !market ) {
+      return response.status(404).json({ message: 'Market was not found' })
+    }
+
     const address = await Address.find(market.address_id)
 
     market.address = address
     market.categories = await market.categories().fetch()
 
     return { market }
+  }
+
+  /**
+   * Delete a single market
+   * POST market/delete/:id
+   * Ok, it's working
+   */
+  async delete({ params, response }) {
+    const id = params.id
+
+    const market = await Market.find(id)
+
+    if( !market ) {
+      return response.status(404).json({ message: 'Market was not found' })
+    }
+
+    const address = await Address.find(market.address_id)
+
+    await market.categories().detach()
+    await address.delete()
+    await market.delete()
+
+    return { message: "Tudo deletado" }
   }
 }
 
