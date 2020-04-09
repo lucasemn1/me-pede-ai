@@ -16,13 +16,15 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
+//User
 Route.on('/').render('welcome')
 Route.post('/users/store', 'UserController.store');
 Route.get('/users', 'UserController.index');
 
-// Route.on('/').render('welcome')
+//Session
 Route.post('/session/login', 'JwtController.login');
 Route.get('/session/me', 'JwtController.me');
-Route.get('/session/tokens', 'JwtController.listTokens');
-Route.delete('/session/logout', 'JwtController.logout');
-// Route.get('/users', 'UserController.index');
+
+//Market
+Route.post('/market/store', 'MarketController.store')
+Route.get('/market/show/:id', 'MarketController.show')

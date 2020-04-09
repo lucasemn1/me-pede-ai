@@ -1,7 +1,6 @@
 'use strict'
 
 const User = use('App/Models/User')
-const Database = use('Database')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -14,6 +13,7 @@ class UserController {
   /**
    * Show a list of all users.
    * GET users
+   * Ok, it's working
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -33,6 +33,7 @@ class UserController {
   /**
    * Create/save a new user.
    * POST users
+   * Ok, it's working
    *
    * @param {object} ctx
    * @param {Request} ctx.request
@@ -56,40 +57,6 @@ class UserController {
     }
 
     return response.json({user})
-  }
-
-  /**
-   * Display a single user.
-   * GET users/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
-  }
-
-  /**
-   * Update user details.
-   * PUT or PATCH users/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async update ({ params, request, response }) {
-  }
-
-  /**
-   * Delete a user with id.
-   * DELETE users/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, request, response }) {
   }
 }
 
