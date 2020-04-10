@@ -19,6 +19,22 @@ class MarketController {
   }
 
   /**
+   * List markets
+   * GET markets/
+   *
+   */
+  async index(){
+    const markets = await this.marketRepository.list()
+
+    for(const market of markets.rows){
+      market.address = await market.address().fetch()
+      market.categories = await market.categories().fetch()
+    }
+
+    return {markets}
+  }
+
+  /**
    * Create/save a new market.
    * POST markets
    * Ok, it's working
@@ -93,6 +109,7 @@ class MarketController {
   /**
    * Update a single market
    * PUT market/update/:id
+   * Ok, it's working
    *
    * @param {object} ctx
    * @param {Request} ctx.request

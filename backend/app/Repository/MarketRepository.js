@@ -59,6 +59,12 @@ class MarketRepository {
       return null
     }
   }
+
+  async list() {
+    const markets = await Market.all()
+
+    return markets
+  }
 }
 
 module.exports = MarketRepository
