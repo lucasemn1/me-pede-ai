@@ -3,6 +3,7 @@
 const Market = use('App/Models/Market')
 const Address = use('App/Models/Address')
 const Category = use('App/Models/Category')
+const MarketRepository = use('App/Repository/MarketRepository')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -12,6 +13,11 @@ const Category = use('App/Models/Category')
  * Resourceful controller for interacting with markets
  */
 class MarketController {
+
+  constructor() {
+    this.marketRepository = new MarketRepository()
+  }
+
   /**
    * Create/save a new market.
    * POST markets
@@ -22,15 +28,7 @@ class MarketController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    // A proposta futura é separar todos esses inserts em funções separadas
-
-    const market = new Market()
-    market.cnpj = request.body.cnpj
-    market.name = request.body.name
-    market.min_value = request.body.minValue
-    market.is_open = request.body.isOpen
-    market.photo = request.body.photo
-    market.phone = request.body.phone
+    const market = await this.marketRepository.create(request.body)
 
     const address = new Address()
     address.number = request.body.address.number

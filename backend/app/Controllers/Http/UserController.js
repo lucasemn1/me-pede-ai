@@ -1,6 +1,7 @@
 'use strict'
 
 const User = use('App/Models/User')
+const UserRepository = use('App/Repository/UserRepository')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -10,6 +11,11 @@ const User = use('App/Models/User')
  * Resourceful controller for interacting with users
  */
 class UserController {
+
+  constructor() {
+    this.userRepository = new UserRepository()
+  }
+
   /**
    * Show a list of all users.
    * GET users
@@ -40,16 +46,13 @@ class UserController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
-    const user = new User();
-    user.name = request.body.name
-    user.email = request.body.email
-    user.password = request.body.password
-    user.phone = request.body.phone
-    user.picture = 'default'
-    user.date_of_birth = request.body.dateOfBirth
-    const address = request.body.address
+    const user = await this.userRepository.create(request.body)
 
-    await user.save()
+    if( !user ){
+      return response.status(500).json({message: "User wasn't created"})
+    }
+
+    const address = request.body.address
 
     if( address ){
       await user.adresses().create(address)
