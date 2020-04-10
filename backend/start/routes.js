@@ -28,4 +28,5 @@ Route.get('/session/me', 'JwtController.me');
 //Market
 Route.post('/market/store', 'MarketController.store')
 Route.get('/market/show/:id', 'MarketController.show')
+Route.put('/market/update/:id', 'MarketController.update')
 Route.delete('/market/delete/:id', 'MarketController.delete')
