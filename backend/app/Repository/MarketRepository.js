@@ -42,7 +42,6 @@ class MarketRepository {
   async update(id, data){
     const market = await this.read(id)
 
-    console.log(market.name)
     market.cnpj = data.cnpj || market.cnpj
     market.name = data.name || market.name
     market.min_value = data.min_value || market.min_value

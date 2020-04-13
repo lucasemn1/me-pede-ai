@@ -27,7 +27,7 @@ Route.get('/session/me', 'JwtController.me');
 
 //Market
 Route.get('/markets', 'MarketController.index')
-Route.post('/market/store', 'MarketController.store')
+Route.post('/market/store', 'MarketController.store').middleware(['authAsSuperUser'])
 Route.get('/market/show/:id', 'MarketController.show')
-Route.put('/market/update/:id', 'MarketController.update')
-Route.delete('/market/delete/:id', 'MarketController.delete')
+Route.put('/market/update/:id', 'MarketController.update').middleware(['authAsSuperUser'])
+Route.delete('/market/delete/:id', 'MarketController.delete').middleware(['authAsSuperUser'])
