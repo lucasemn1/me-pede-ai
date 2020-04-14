@@ -18,12 +18,13 @@ const Route = use('Route')
 
 //User
 Route.on('/').render('welcome')
-Route.post('/users/store', 'UserController.store');
-Route.get('/users', 'UserController.index');
+Route.post('/user/store', 'UserController.store')
+Route.put('/user/update', 'UserController.update').middleware(['auth'])
+Route.get('/users', 'UserController.index').middleware(['authAsSuperUser'])
 
 //Session
-Route.post('/session/login', 'JwtController.login');
-Route.get('/session/me', 'JwtController.me');
+Route.post('/session/login', 'JwtController.login')
+Route.get('/session/me', 'JwtController.me').middleware(['auth']);
 
 //Market
 Route.get('/markets', 'MarketController.index')

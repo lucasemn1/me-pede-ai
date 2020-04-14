@@ -61,6 +61,19 @@ class UserController {
 
     return response.json({user})
   }
+
+  /**
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
+  async update({ request, response, auth }){
+    let user = await auth.getUser()
+
+    user = await this.userRepository.update(user, request.body)
+
+    return response.json({user})
+  }
 }
 
 module.exports = UserController
