@@ -2,6 +2,7 @@
 
 const User = use('App/Models/User')
 const UserRepository = use('App/Repository/UserRepository')
+const AddressRepository = use('App/Repository/AddressRepository')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -30,7 +31,7 @@ class UserController {
     const users = await User.all()
 
     for( const user of users.rows ){
-      user.adresses = await user.adresses().fetch()
+      user.adresses = await user.address().fetch()
     }
 
     return response.json(users)
@@ -52,11 +53,12 @@ class UserController {
       return response.status(500).json({message: "User wasn't created"})
     }
 
-    const address = request.body.address
+    if( request.body.address ){
+      const addressRepository = new AddressRepository()
+      const address = await addressRepository.create(request.body.address)
 
-    if( address ){
-      await user.adresses().create(address)
-      user.adresses = await user.adresses().fetch()
+      await user.address().associate(address)
+      user.address = await user.address().fetch()
     }
 
     return response.json({user})

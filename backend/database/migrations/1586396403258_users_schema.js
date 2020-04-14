@@ -14,6 +14,7 @@ class UsersSchema extends Schema {
       table.integer('level').notNullable().default(1)
       table.string('phone', 20).notNullable()
       table.date('date_of_birth').notNullable()
+      table.bigInteger('address_id').references('id').on('adresses')
       table.timestamps()
     })
   }

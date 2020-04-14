@@ -40,14 +40,8 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
-  adresses() {
-    return this.belongsToMany(
-      Address,
-      'user_id',
-      'address_id',
-      'id',
-      'id'
-    ).pivotTable('adresses_users')
+  address() {
+    return this.belongsTo('App/Models/Address')
   }
 }
 

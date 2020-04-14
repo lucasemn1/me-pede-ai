@@ -16,6 +16,10 @@
 
 // Factory.blueprint('App/Models/User', (faker) => {
 //   return {
-//     username: faker.username()
+//     username: faker.username(),
+//     email: faker.email(),
+//     password: faker.password(),
+//     phone: faker.phone(),
+//     date_of_birth: faker.date_of_birth(),
 //   }
 // })
