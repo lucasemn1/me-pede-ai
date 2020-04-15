@@ -14,3 +14,6 @@ database/*.sqlite
 # VSCode & Webstorm history directories
 .history
 .idea
+
+# Uploaded files
+tmp

@@ -43,13 +43,15 @@ class MarketController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {
+  async store ({ request, response }) {    
+    // Cadastro do mercado
     const market = await this.marketRepository.create(request.body)
 
     if( !market ) {
       return response.status(500).json({message: "Market wasn't created"})
     }
 
+    //Cadastro e tratando endereços
     const addressRepository = new AddressRepository()
     const address = await addressRepository.create(request.body.address)
 
@@ -60,15 +62,15 @@ class MarketController {
       })
     }
 
+    await market.address().associate(address)
+    market.address = address
+
+    //Funcionalidade de linkar categorias
     const categories = {
       categories: request.body.categories,
       registred: [],
     }
 
-    await market.address().associate(address)
-    market.address = address
-
-    //Funcionalidade de linkar categorias
     for(const category of categories.categories){
       const categoryRegisted = await Category.query().where('category', category).first()
 

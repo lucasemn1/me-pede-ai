@@ -1,4 +1,5 @@
 const Market = use('App/Models/Market')
+const Helpers = use('Helpers')
 
 class MarketRepository {
   /**
@@ -11,11 +12,12 @@ class MarketRepository {
     market.name = data.name
     market.min_value = data.min_value
     market.is_open = data.is_open
-    market.photo = data.photo
+    market.photo = 'default.jpg'
     market.phone = data.phone
 
     try{
       await market.save()
+      
       return market
     }
     catch(err) {

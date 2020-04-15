@@ -32,3 +32,6 @@ Route.post('/market/store', 'MarketController.store').middleware(['authAsSuperUs
 Route.get('/market/show/:id', 'MarketController.show')
 Route.put('/market/update/:id', 'MarketController.update').middleware(['authAsSuperUser'])
 Route.delete('/market/delete/:id', 'MarketController.delete').middleware(['authAsSuperUser'])
+
+//Market Picture
+Route.post('/market/store/photo/:marketId', 'MarketPictureController.store').middleware(['authAsSuperUser'])
