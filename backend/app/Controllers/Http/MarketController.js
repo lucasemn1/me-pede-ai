@@ -43,7 +43,7 @@ class MarketController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response }) {    
+  async store ({ request, response }) {
     // Cadastro do mercado
     const market = await this.marketRepository.create(request.body)
 
@@ -119,11 +119,13 @@ class MarketController {
    */
   async update({ params, request, response }) {
     const market_id = params.id
-    const market = await this.marketRepository.update(market_id, request.body)
+    let market = await this.marketRepository.read(market_id)
 
     if( !market ){
       return response.status(404).json({message:"Market wasn't found"})
     }
+
+    market = await this.marketRepository.update(market, request.body)
 
     if( request.body.address ){
       const addressRepository = new AddressRepository()

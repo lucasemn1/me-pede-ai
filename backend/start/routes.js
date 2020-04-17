@@ -35,3 +35,5 @@ Route.delete('/market/delete/:id', 'MarketController.delete').middleware(['authA
 
 //Market Picture
 Route.post('/market/store/photo/:marketId', 'MarketPictureController.store').middleware(['authAsSuperUser'])
+Route.put('/market/update/photo/:marketId', 'MarketPictureController.update').middleware(['authAsSuperUser'])
+Route.get('/market/:id/photo', 'MarketPictureController.show')

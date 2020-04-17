@@ -17,7 +17,7 @@ class MarketRepository {
 
     try{
       await market.save()
-      
+
       return market
     }
     catch(err) {
@@ -41,9 +41,7 @@ class MarketRepository {
    * @param {Number} id
    * @param {Object} data
    */
-  async update(id, data){
-    const market = await this.read(id)
-
+  async update(market, data){
     market.cnpj = data.cnpj || market.cnpj
     market.name = data.name || market.name
     market.min_value = data.min_value || market.min_value
