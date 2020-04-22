@@ -11,7 +11,6 @@ class MarketRepository {
     market.cnpj = data.cnpj
     market.name = data.name
     market.min_value = data.min_value
-    market.is_open = data.is_open
     market.photo = 'default.jpg'
     market.phone = data.phone
 

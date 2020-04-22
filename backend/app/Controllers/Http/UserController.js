@@ -3,7 +3,7 @@
 const User = use('App/Models/User')
 const UserRepository = use('App/Repository/UserRepository')
 const AddressRepository = use('App/Repository/AddressRepository')
-const { validate } = use('Validator')
+const { validateAll } = use('Validator')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
