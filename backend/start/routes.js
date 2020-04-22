@@ -18,7 +18,7 @@ const Route = use('Route')
 
 //User
 Route.on('/').render('welcome')
-Route.post('/user/store', 'UserController.store')
+Route.post('/user/store', 'UserController.store').validator({name: 'required'})
 Route.put('/user/update', 'UserController.update').middleware(['auth'])
 Route.get('/users', 'UserController.index').middleware(['authAsSuperUser'])
 

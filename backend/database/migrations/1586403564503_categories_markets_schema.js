@@ -8,8 +8,8 @@ class CategoriesMarketsSchema extends Schema {
     this.create('categories_markets', (table) => {
       table.increments()
 
-      table.bigInteger('category_id').references('id').on('categories')
-      table.bigInteger('market_id').references('id').on('markets')
+      table.integer('category_id').unsigned().references('id').inTable('categories')
+      table.integer('market_id').unsigned().references('id').inTable('markets')
 
       table.timestamps()
     })

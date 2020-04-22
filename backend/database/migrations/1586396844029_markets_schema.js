@@ -15,7 +15,7 @@ class MarketSchema extends Schema {
       table.string('photo', 254).notNullable()
       table.string('phone', 20).notNullable()
 
-      table.bigInteger('address_id').references('id').on('adresses')
+      table.integer('address_id').unsigned().references('id').inTable('addresses')
 
       table.timestamps()
     })

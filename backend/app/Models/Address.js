@@ -6,7 +6,7 @@ const Market = use('App/Models/Market')
 
 class Address extends Model {
   static get table() {
-    return 'adresses'
+    return 'addresses'
   }
 
   markets() {

@@ -3,6 +3,7 @@
 const User = use('App/Models/User')
 const UserRepository = use('App/Repository/UserRepository')
 const AddressRepository = use('App/Repository/AddressRepository')
+const { validate } = use('Validator')
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -27,7 +28,7 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response }) {
+  async index ({ response }) {
     const users = await User.all()
 
     for( const user of users.rows ){
