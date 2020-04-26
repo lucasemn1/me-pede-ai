@@ -23,7 +23,7 @@ class JwtController {
   async me ({ request, response, auth }) {
     const user = await auth.getUser()
 
-    return { user }
+    return response.status(200).json(user)
   }
 
   /**
@@ -39,7 +39,7 @@ class JwtController {
     const password = request.body.password
 
     const token = await auth.attempt(email, password)
-    return {token}
+    return response.status(200).json(token)
   }
 }
 

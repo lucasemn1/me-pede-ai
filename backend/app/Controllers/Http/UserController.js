@@ -62,7 +62,7 @@ class UserController {
       user.address = await user.address().fetch()
     }
 
-    return response.json({user})
+    return response.status(200).json(user)
   }
 
   /**
@@ -75,7 +75,24 @@ class UserController {
 
     user = await this.userRepository.update(user, request.body)
 
-    return response.json({user})
+    return response.status(200).json(user)
+  }
+
+  /**
+   *
+   * @param {Response} ctx.response
+   */
+  async destroy({ response, auth }){
+    let user = await auth.getUser()
+    let address = await user.address().fetch()
+
+    await user.delete()
+
+    if( address ) {
+      await address.delete()
+    }
+
+    return response.status(200).json({})
   }
 }
 

@@ -22,6 +22,14 @@ Factory.blueprint('App/Models/User', (faker) => {
   function formateDate(date) {
     const fields = date.split('/')
     fields.reverse()
+
+    if(fields[1]<10) {
+      fields[1] = `0${fields[1]}`
+    }
+    if(fields[2]<10) {
+      fields[2] = `0${fields[2]}`
+    }
+
     return `${fields[0]}/${fields[2]}/${fields[1]}`
   }
 
@@ -29,10 +37,22 @@ Factory.blueprint('App/Models/User', (faker) => {
     name: faker.username(),
     email: faker.email(),
     picture: 'default.jpg',
-    password: faker.password(),
+    password: '123',
     phone: faker.phone(),
     date_of_birth: formateDate(faker.birthday({string:true})),
     level: 1
   }
 })
 
+Factory.blueprint('App/Models/Address', (faker) => {
+  return {
+    number: faker.integer({min: 0, max: 999}),
+    complement: 'casa',
+    neighborhood: faker.street(),
+    city: faker.city(),
+    uf: faker.state(),
+    country: faker.country(),
+    postcode: faker.postcode(),
+    street: faker.street()
+  }
+})

@@ -15,8 +15,8 @@ class AuthAsSuperUser {
     if( user.level >= 2 ){
       return await next()
     }
-    
-    return response.status(406).json({message:"You haven't authorization to access this route"})
+
+    return response.status(401).json({message:"You haven't authorization to access this route"})
   }
 }
 

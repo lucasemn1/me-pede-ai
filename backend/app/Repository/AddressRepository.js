@@ -13,7 +13,7 @@ class AddressRepository {
     address.city = data.city
     address.uf = data.uf
     address.country = data.country
-    address.cep = data.cep
+    address.postcode = data.postcode
     address.street = data.street
 
     try{
@@ -49,7 +49,7 @@ class AddressRepository {
     address.city = data.city || address.city
     address.uf = data.uf || address.uf
     address.country = data.country || address.country
-    address.cep = data.cep || address.cep
+    address.postcode = data.postcode || address.postcode
     address.street = data.street || address.street
 
     try{

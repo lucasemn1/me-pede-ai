@@ -31,6 +31,10 @@ Route
   .validator(['UpdateUser'])
 
 Route
+  .delete('/user/destroy', 'UserController.destroy')
+  .middleware(['auth'])
+
+Route
   .get('/users', 'UserController.index')
   .middleware(['authAsSuperUser'])
 
@@ -47,7 +51,7 @@ Route.get('/markets', 'MarketController.index')
 
 Route
   .post('/market/store', 'MarketController.store')
-  // .middleware(['authAsSuperUser'])
+  .middleware(['authAsSuperUser'])
   .validator(['StoreMarket'])
 
 Route.get('/market/show/:id', 'MarketController.show')
@@ -55,6 +59,7 @@ Route.get('/market/show/:id', 'MarketController.show')
 Route
   .put('/market/update/:id', 'MarketController.update')
   .middleware(['authAsSuperUser'])
+  .validator(['UpdateMarket'])
 
 Route
   .delete('/market/delete/:id', 'MarketController.delete')

@@ -14,7 +14,7 @@ class AddressesSchema extends Schema {
       table.string('city', 100).notNullable()
       table.string('uf', 2).notNullable()
       table.string('country', 50).notNullable()
-      table.string('cep', 10).notNullable()
+      table.string('postcode', 10).notNullable()
       table.timestamps()
     })
   }

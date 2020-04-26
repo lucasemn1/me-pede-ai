@@ -13,7 +13,7 @@ class StoreMarket {
       'address.city': 'required|string|max:100',
       'address.uf': 'required|string|max:2',
       'address.country': 'required|string|max:50',
-      'address.cep': 'required|string|max:10',
+      'address.postcode': 'required|string|max:10',
       'address.street': 'required|string|max:255',
     }
   }
