@@ -56,3 +56,35 @@ Factory.blueprint('App/Models/Address', (faker) => {
     street: faker.street()
   }
 })
+
+Factory.blueprint('App/Models/Market', (faker) => {
+  /**
+   * @param {Number} cnpj
+   */
+  function formatCpnj(cnpj) {
+    let cnpjStr = cnpj.toString()
+
+    if( cnpjStr.length < 13 ){
+      let complement = ''
+      for(let i = 0; i<13 - cnpjStr.length; i++){
+        complement = `1${complement}`
+      }
+      cnpjStr = `${complement}${cnpjStr}`
+    }
+
+    return Number.parseInt(cnpjStr)
+  }
+
+  return {
+    cnpj: formatCpnj(faker.integer({ min: 0, max: 999999 })),
+    name: faker.name(),
+    min_value: faker.floating({max:999, min:1, fixed: 2}),
+    phone: faker.phone()
+  }
+})
+
+Factory.blueprint('App/Models/Category', async (faker) => {
+  return {
+    category: faker.name(),
+  }
+})

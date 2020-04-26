@@ -80,7 +80,9 @@ class MarketController {
       }
     }
 
-    return { market, categories }
+    market.categories = categories.registred
+
+    return response.status(200).json(market)
   }
 
   /**
