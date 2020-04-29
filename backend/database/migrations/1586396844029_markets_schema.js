@@ -12,7 +12,7 @@ class MarketSchema extends Schema {
       table.string('name', 254).notNullable()
       table.decimal('min_value', 6, 2).notNullable()
       table.boolean('is_open').default(false)
-      table.string('photo', 254).notNullable()
+      table.string('picture', 254).notNullable()
       table.string('phone', 20).notNullable()
 
       table.integer('address_id').unsigned().references('id').inTable('addresses')

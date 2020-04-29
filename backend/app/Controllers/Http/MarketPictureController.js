@@ -33,26 +33,25 @@ class MarketPictureController {
     }
 
     // Impedindo de enviar mais de uma foto por user
-    if (market.photo !== 'default.jpg') {
-      return response.status(500).json({ message: 'This market already has a photo' })
+    if (market.picture !== 'default.jpg') {
+      return response.status(500).json({ message: 'This market already has a picture' })
     }
 
-    const photo = request.file('photo', {
-      type: ['image'],
-      size: '3MB',
-      extnames: ['png', 'jpg', 'jpeg']
+    const picture = request.file('picture', {
+      types: ['png', 'jpg', 'jpeg'],
+      size: '3mb',
     })
 
-    const photoName = await this.pictureRepository.create(photo)
+    const pictureName = await this.pictureRepository.create(picture)
 
-    if (!photoName) {
-      return response.status(500).json({ message: "Photo wasn't saved." })
+    if (!pictureName) {
+      return response.status(500).json({ message: "picture wasn't saved." })
     }
 
-    market.photo = photoName
+    market.picture = pictureName
     await market.save()
 
-    return response.status(200).json({ photoName })
+    return response.status(200).json({ pictureName })
   }
 
   /**
@@ -70,34 +69,33 @@ class MarketPictureController {
     const market = await marketRepostory.read(marketId)
 
     // Impedindo que o usuário atualize caso ele tenha imagem default
-    if (market.photo === 'default.jpg') {
-      return response.status(500).json({ message: 'Unavailable because the market does not have a photo' })
+    if (market.picture === 'default.jpg') {
+      return response.status(500).json({ message: 'Unavailable because the market does not have a picture' })
     }
 
-    const photo = request.file('photo', {
-      type: ['image'],
-      size: '3MB',
-      extnames: ['png', 'jpg', 'jpeg']
+    const picture = request.file('picture', {
+      types: ['png', 'jpg', 'jpeg'],
+      size: '3mb',
     })
 
-    const photoName = await this.pictureRepository.update(
-      market.photo,
-      photo
+    const pictureName = await this.pictureRepository.update(
+      market.picture,
+      picture
     )
 
-    if (!photoName) {
-      return response.status(500).json({ message: "The photo could not be changed." })
+    if (!pictureName) {
+      return response.status(500).json({ message: "The picture could not be changed." })
     }
 
-    market.photo = photoName
+    market.picture = pictureName
 
     await market.save()
 
-    return response.status(200).json({ photoName })
+    return response.status(200).json({ pictureName })
   }
 
   /**
-   * Send market photo.
+   * Send market picture.
    * POST markets
    * Ok, it's working
    *
@@ -111,7 +109,28 @@ class MarketPictureController {
       return response.status(404).json({ message: "Market wasn't found" })
     }
 
-    return response.download(Helpers.tmpPath(`uploads/markets/${market.photo}`))
+    return response.status(200).download(Helpers.tmpPath(`uploads/markets/${market.picture}`))
+  }
+
+  /**
+   *
+   * @param {Response} ctx.response
+   */
+  async destroy({ params, response }){
+    const marketId = params.marketId
+    const market = await new MarketRepostory().read(marketId)
+
+    if( market.picture === 'default.jpg' ) {
+      return response.status(404).json({ message: 'Image not found. Please send a picture first.' })
+    }
+    if( !(await this.pictureRepository.delete(market.picture)) ) {
+      return response.status(500).json({ message: "Couldn't delete the image" })
+    }
+
+    market.picture = 'default.jpg'
+    await market.save()
+
+    return response.status(200).json()
   }
 }
 

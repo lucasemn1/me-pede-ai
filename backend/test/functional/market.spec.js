@@ -2,7 +2,6 @@
 
 const { test, trait } = use('Test/Suite')('Market')
 const Factory = use('Factory')
-const Category = use('App/Models/Category')
 
 trait('Test/ApiClient')
 
@@ -15,7 +14,7 @@ class MarketTest {
     this.index()
     this.show()
     this.update()
-    this.delete()
+    this.destroy()
   }
 
   createSuperUserAndGetJwt() {
@@ -35,23 +34,6 @@ class MarketTest {
     })
   }
 
-  async createCategories() {
-    const mercadoCategory = new Category()
-    mercadoCategory.category = 'Mercado'
-    await mercadoCategory.save()
-
-    const createdCategories = await Factory.model('App/Models/Category').makeMany(3)
-    const categories = []
-
-    createdCategories.map(category => {
-      categories.push(category.$attributes.category)
-    })
-
-    categories.push(mercadoCategory.category)
-
-    return categories
-  }
-
   store() {
     test('Store market (Just superusers)', async ({ client }) => {
       const market = await Factory.model('App/Models/Market').make()
@@ -59,7 +41,7 @@ class MarketTest {
 
       const data = market.$attributes
       data.address = address.$attributes
-      data.categories = await this.createCategories()
+      data.categories = await Factory.model('App/Models/Category').makeMany(3)
 
       const response = await client.post('/market/store')
         .send(data)
@@ -121,8 +103,8 @@ class MarketTest {
     })
   }
 
-  delete() {
-    test('Delete market', async ({ client }) => {
+  destroy() {
+    test('Destroy market', async ({ client }) => {
       const response = await client.delete(`market/delete/${this.marketId}`)
         .header('accept', 'application/json')
         .header('Authorization', `Bearer ${this.jwt}`)

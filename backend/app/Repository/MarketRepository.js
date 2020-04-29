@@ -11,7 +11,7 @@ class MarketRepository {
     market.cnpj = data.cnpj
     market.name = data.name
     market.min_value = data.min_value
-    market.photo = 'default.jpg'
+    market.picture = 'default.jpg'
     market.phone = data.phone
 
     try{
@@ -45,7 +45,7 @@ class MarketRepository {
     market.name = data.name || market.name
     market.min_value = data.min_value || market.min_value
     market.is_open = data.is_open == undefined ? market.is_open: data.is_open
-    market.photo = data.photo || market.photo
+    market.picture = data.picture || market.picture
     market.phone = data.phone || market.phone
 
     try{

@@ -10,7 +10,7 @@ class UserRepository{
     user.name = data.name
     user.email = data.email
     user.password = data.password
-    user.picture = 'default'
+    user.picture = 'default.jpg'
     user.phone = data.phone
     user.date_of_birth = data.date_of_birth
 

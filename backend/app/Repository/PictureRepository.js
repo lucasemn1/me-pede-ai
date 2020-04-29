@@ -2,59 +2,43 @@ const Helpers = use('Helpers')
 const { unlink } = require('fs')
 
 class PictureRepository {
-    constructor(path){
-        this.path = path
-    }
+  constructor(path) {
+    this.path = path
+  }
+  async pictureValidator(picture) {
 
-    async create(photo) {
-        const photoName = `${new Date().getTime()}.${photo.extname}`
+  }
 
-        await photo.move(Helpers.tmpPath(`uploads/${this.path}`), {
-          name:photoName,
-          overwrite: true
-        })
+  async create(picture) {
+    const pictureName = `${new Date().getTime()}.${picture.extname}`
 
-        if(!photo.moved()) {
-            console.log()
-        }
+    await picture.move(Helpers.tmpPath(`uploads/${this.path}`), {
+      name: pictureName,
+      overwrite: true
+    })
 
-        return photo.moved() ? photoName: null
-    }
+    return picture.moved() ? pictureName : null
+  }
 
-    async update(photoName, photo) {
-      try{
-        await unlink(Helpers.tmpPath(`uploads/${this.path}/${photoName}`), (err) => {
-          if (err) throw err
-        })
+  async update(pictureName, picture) {
+    await picture.move(Helpers.tmpPath(`uploads/${this.path}`), {
+      name: pictureName,
+      overwrite: true
+    })
+
+    return picture.moved() ? pictureName : null
+  }
+
+  async delete(pictureName) {
+    let result;
+    await unlink(Helpers.tmpPath(`uploads/${this.path}/${pictureName}`), (err) => {
+      if (err) {
+        result = false
       }
-      catch(err) {
-        return null
-      }
-
-      await photo.move(Helpers.tmpPath(`uploads/${this.path}`), {
-        name:photoName,
-        overwrite: true
-      })
-
-      if(!photo.moved()) {
-          console.log()
-      }
-
-      return photo.moved() ? photoName: null
-    }
-
-    async delete(photoName){
-      try{
-        await unlink(Helpers.tmpPath(`uploads/${this.path}/${photoName}`), (err) => {
-          if (err) throw err
-        })
-
-        return true
-      }
-      catch(err) {
-        return false
-      }
-    }
+    })
+    result = true
+    return result
+  }
 }
 
 module.exports = PictureRepository

@@ -38,6 +38,19 @@ Route
   .get('/users', 'UserController.index')
   .middleware(['authAsSuperUser'])
 
+// User Picture
+Route.post('/user/store/picture', 'UserPictureController.store')
+  .middleware(['auth'])
+
+Route.get('/user/picture', 'UserPictureController.show')
+  .middleware(['auth'])
+
+Route.put('/user/update/picture', 'UserPictureController.update')
+.middleware(['auth'])
+
+Route.delete('/user/delete/picture', 'UserPictureController.delete')
+  .middleware(['auth'])
+
 
 //Session
 Route.post('/session/login', 'JwtController.login')
@@ -67,10 +80,12 @@ Route
 
 //Market Picture
 Route
-  .post('/market/store/photo/:marketId', 'MarketPictureController.store')
+  .post('/market/store/picture/:marketId', 'MarketPictureController.store')
   .middleware(['authAsSuperUser'])
 Route
-  .put('/market/update/photo/:marketId', 'MarketPictureController.update')
+  .put('/market/update/picture/:marketId', 'MarketPictureController.update')
   .middleware(['authAsSuperUser'])
 
-Route.get('/market/:id/photo', 'MarketPictureController.show')
+Route.get('/market/:id/picture', 'MarketPictureController.show')
+
+Route.delete('/market/delete/picture/:marketId', 'MarketPictureController.destroy')
