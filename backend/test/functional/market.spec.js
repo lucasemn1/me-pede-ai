@@ -9,9 +9,13 @@ trait('Test/ApiClient')
 class MarketTest {
   constructor(){
     this.jwt = ''
+    this.marketId = 0
     this.createSuperUserAndGetJwt()
-    // this.index()
     this.store()
+    this.index()
+    this.show()
+    this.update()
+    this.delete()
   }
 
   createSuperUserAndGetJwt() {
@@ -67,14 +71,64 @@ class MarketTest {
       response.assertJSONSubset({
         cnpj: data.cnpj
       })
-      // console.log(response)
+
+      this.marketId = response.body.id
     })
   }
 
   index() {
     test('List all markets', async ({ client }) => {
       const response = await client.get('markets').header('accept', 'application/json').end()
-      console.log(response)
+
+      response.assertStatus(200)
+    })
+  }
+
+  show() {
+    test('Show market', async ({ client }) => {
+      const marketId = this.marketId
+      const response = await client.get(`market/show/${marketId}`)
+        .header('accept', 'application/json')
+        .end()
+
+      response.assertStatus(200)
+      response.assertJSONSubset({
+        id: marketId
+      })
+    })
+  }
+
+  update() {
+    test('Update market', async ({ client }) => {
+      const marketId = this.marketId
+      const market = await Factory.model('App/Models/Market').make()
+      const address = await Factory.model('App/Models/Address').make()
+
+      const data = market.$attributes
+      data.address = address.$attributes
+      data.categories = ['Mercado', 'Pizzaria', 'Padaria']
+
+      const response = await client.put(`market/update/${this.marketId}`)
+        .send(data)
+        .header('accept', 'application/json')
+        .header('Authorization', `Bearer ${this.jwt}`)
+        .end()
+
+      response.assertStatus(200)
+      response.assertJSONSubset({
+        id: marketId
+      })
+    })
+  }
+
+  delete() {
+    test('Delete market', async ({ client }) => {
+      const response = await client.delete(`market/delete/${this.marketId}`)
+        .header('accept', 'application/json')
+        .header('Authorization', `Bearer ${this.jwt}`)
+        .end()
+
+      response.assertStatus(200)
     })
   }
 }

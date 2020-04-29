@@ -21,9 +21,9 @@ class MarketController {
   /**
    * List markets
    * GET markets/
-   *
+   * @param { Response } ctx.response
    */
-  async index(){
+  async index({ response }){
     const markets = await this.marketRepository.list()
 
     for(const market of markets.rows){
@@ -31,7 +31,7 @@ class MarketController {
       market.categories = await market.categories().fetch()
     }
 
-    return {markets}
+    return response.status(200).json(markets)
   }
 
   /**
@@ -107,7 +107,7 @@ class MarketController {
     market.address = address
     market.categories = await market.categories().fetch()
 
-    return { market }
+    return response.status(200).json(market)
   }
 
   /**
@@ -151,7 +151,7 @@ class MarketController {
       market.categories = await market.categories().fetch()
     }
 
-    return { market }
+    return response.status(200).json(market)
   }
 
   /**
@@ -170,8 +170,8 @@ class MarketController {
     const address = await Address.find(market.address_id)
 
     await market.categories().detach()
-    await address.delete()
     await market.delete()
+    await address.delete()
 
     return response.status(200).json()
   }
