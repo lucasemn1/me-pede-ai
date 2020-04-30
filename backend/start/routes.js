@@ -38,6 +38,7 @@ Route
   .get('/users', 'UserController.index')
   .middleware(['authAsSuperUser'])
 
+
 // User Picture
 Route.post('/user/store/picture', 'UserPictureController.store')
   .middleware(['auth'])

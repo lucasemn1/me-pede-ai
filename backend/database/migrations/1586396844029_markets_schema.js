@@ -16,6 +16,7 @@ class MarketSchema extends Schema {
       table.string('phone', 20).notNullable()
 
       table.integer('address_id').unsigned().references('id').inTable('addresses')
+      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('SET NULL')
 
       table.timestamps()
     })
