@@ -90,3 +90,8 @@ Route
 Route.get('/market/:id/picture', 'MarketPictureController.show')
 
 Route.delete('/market/delete/picture/:marketId', 'MarketPictureController.destroy')
+  .middleware(['authAsSuperUser'])
+
+
+//Product
+Route.post('/product/store', 'ProductController.store').middleware(['auth', 'marketAdm'])

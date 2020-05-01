@@ -9,7 +9,18 @@ class ProductRepository {
    * @param {Array} data
    */
   async create(data) {
-    // const product = new Product()
+    const product = new Product()
+    product.title = data.title
+    product.price = data.price
+    product.stock = data.stock
+    product.picture = 'default.jpg'
+    product.market_id = data.market_id
+
+    if( await product.save() ) {
+      return product
+    }
+
+    return null
   }
 
   /**

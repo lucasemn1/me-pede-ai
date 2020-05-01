@@ -57,7 +57,7 @@ Factory.blueprint('App/Models/Address', (faker) => {
   }
 })
 
-Factory.blueprint('App/Models/Market', (faker) => {
+Factory.blueprint('App/Models/Market', async (faker, i, data) => {
   /**
    * @param {Number} cnpj
    */
@@ -76,13 +76,12 @@ Factory.blueprint('App/Models/Market', (faker) => {
   }
 
   return {
-    cnpj: formatCpnj(faker.integer({ min: 0, max: 999999 })),
-    name: faker.name(),
-    min_value: faker.floating({max:999, min:1, fixed: 2}),
-    phone: faker.phone(),
-    user_id: 1,
-    picture: 'default.jpg',
-    // address_id: 1
+    cnpj: data.cpf ? data.cpf : formatCpnj(faker.integer({ min: 0, max: 999999 })),
+    name: data.name ? data.name : faker.name(),
+    min_value: data.min_value ? data.min_value : faker.floating({max:999, min:1, fixed: 2}),
+    phone: data.phone ? data.phone : faker.phone(),
+    user_id: data.user_id,
+    picture: data.picture ? data.picture : 'default.jpg',
   }
 })
 
@@ -92,11 +91,12 @@ Factory.blueprint('App/Models/Category', async (faker) => {
   }
 })
 
-Factory.blueprint('App/Models/Product', async (faker) => {
+Factory.blueprint('App/Models/Product', async (faker, i, data) => {
   return {
     title: faker.name(),
     price: faker.floating({ min: 0, max: 9999, fixed: 2 }),
     picture: 'default.jpg',
-    stock: faker.integer({ min: 0, max: 1000 })
+    stock: faker.integer({ min: 0, max: 1000 }),
+    market_id: data.market_id ? data.market_id: 1
   }
 })
