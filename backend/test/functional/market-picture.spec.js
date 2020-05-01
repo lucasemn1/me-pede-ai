@@ -31,7 +31,6 @@ class MarketPictureTest {
         .end()
 
       response.assertStatus(200)
-
       this.jwt = response.body.token
     })
   }

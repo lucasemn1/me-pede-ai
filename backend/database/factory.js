@@ -40,7 +40,7 @@ Factory.blueprint('App/Models/User', (faker) => {
     password: '123',
     phone: faker.phone(),
     date_of_birth: formateDate(faker.birthday({string:true})),
-    level: 1
+    level: 1,
   }
 })
 
@@ -79,12 +79,24 @@ Factory.blueprint('App/Models/Market', (faker) => {
     cnpj: formatCpnj(faker.integer({ min: 0, max: 999999 })),
     name: faker.name(),
     min_value: faker.floating({max:999, min:1, fixed: 2}),
-    phone: faker.phone()
+    phone: faker.phone(),
+    user_id: 1,
+    picture: 'default.jpg',
+    // address_id: 1
   }
 })
 
 Factory.blueprint('App/Models/Category', async (faker) => {
   return {
     category: faker.name(),
+  }
+})
+
+Factory.blueprint('App/Models/Product', async (faker) => {
+  return {
+    title: faker.name(),
+    price: faker.floating({ min: 0, max: 9999, fixed: 2 }),
+    picture: 'default.jpg',
+    stock: faker.integer({ min: 0, max: 1000 })
   }
 })
