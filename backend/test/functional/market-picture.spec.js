@@ -79,7 +79,7 @@ class MarketPictureTest {
   store() {
     test('Store market picture', async ({ client }) => {
       const response = await client.post(`/market/store/picture/${this.marketId}`)
-        .attach('picture', Helpers.tmpPath('uploads/markets/test_default.png'))
+        .attach('picture', Helpers.tmpPath('static/markets/test_default.jpg'))
         .header('accept', 'application/json')
         .header('Authorization', `Bearer ${this.jwt}`)
         .end()
@@ -99,7 +99,7 @@ class MarketPictureTest {
   update() {
     test('Update market picture', async ({ client }) => {
       const response = await client.put(`market/update/picture/${this.marketId}`)
-        .attach('picture', Helpers.tmpPath('uploads/markets/test_default_update.png'))
+        .attach('picture', Helpers.tmpPath('static/markets/test_update_default.jpg'))
         .header('accept', 'application/json')
         .header('Authorization', `Bearer ${this.jwt}`)
         .end()

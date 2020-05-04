@@ -2,9 +2,6 @@
 node_modules
 package-lock.json
 
-# Adonis directory for storing tmp files
-tmp
-
 # Environment variables, never commit this file
 .env
 
@@ -15,5 +12,6 @@ database/*.sqlite
 .history
 .idea
 
-# Uploaded files
-tmp
+# Ignore uploaded files
+tmp/uploads/markets/*
+tmp/uploads/users/*

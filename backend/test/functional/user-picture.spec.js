@@ -35,7 +35,7 @@ class UserPictureTest {
   store() {
     test('Store user picture', async ({ client }) => {
       const response = await client.post(`/user/store/picture`)
-        .attach('picture', Helpers.tmpPath('uploads/users/test_default.png'))
+        .attach('picture', Helpers.tmpPath('static/users/test_default.jpg'))
         .header('accept', 'application/json')
         .header('Authorization', `Bearer ${this.jwt}`)
         .end()
@@ -58,7 +58,7 @@ class UserPictureTest {
   update() {
     test('Update user picture', async ({ client }) => {
       const response = await client.put(`user/update/picture`)
-        .attach('picture', Helpers.tmpPath('uploads/users/test_default_update.png'))
+        .attach('picture', Helpers.tmpPath('static/users/test_update_default.jpg'))
         .header('accept', 'application/json')
         .header('Authorization', `Bearer ${this.jwt}`)
         .end()
