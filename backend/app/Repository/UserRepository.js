@@ -27,7 +27,7 @@ class UserRepository{
   async update(user, data){
     user.name = data.name || user.name
     user.email = data.email || user.email
-    user.picture = 'default' || user.picture
+    user.picture = 'default.jpg' || user.picture
     user.phone = data.phone || user.phone
     user.date_of_birth = data.date_of_birth || user.date_of_birth
 

@@ -42,6 +42,7 @@ const namedMiddleware = {
   guest: 'Adonis/Middleware/AllowGuestOnly',
   authAsSuperUser: 'App/Middleware/AuthAsSuperUser',
   marketAdm: 'App/Middleware/MarketAdm',
+  productMarket: 'App/Middleware/ProductMarket'
 }
 
 /*

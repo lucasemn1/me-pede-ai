@@ -94,4 +94,17 @@ Route.delete('/market/delete/picture/:marketId', 'MarketPictureController.destro
 
 
 //Product
-Route.post('/product/store', 'ProductController.store').middleware(['auth', 'marketAdm'])
+Route.post('/product/store', 'ProductController.store')
+  .middleware(['auth', 'marketAdm'])
+  .validator(['StoreProduct'])
+
+Route.put('/product/update/:id', 'ProductController.update')
+  .validator(['UpdateProduct'])
+  .middleware(['auth', 'marketAdm', 'productMarket'])
+
+Route.delete('/product/delete/:id', 'ProductController.delete')
+  .middleware(['auth', 'marketAdm', 'productMarket'])
+
+Route.get('/products/:page?', 'ProductController.index')
+
+Route.get('/product/:id', 'ProductController.show')

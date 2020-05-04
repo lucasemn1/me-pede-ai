@@ -27,7 +27,10 @@ class ProductRepository {
    *
    * @param {Number} id
    */
-  async show(id) {
+  async read(id) {
+    const product = await Product.find(id)
+    
+    return product
   }
 
   /**
@@ -36,13 +39,19 @@ class ProductRepository {
    * @param {Number} id
    */
   async update(data, id) {
-  }
+    const product = await Product.find(id)
 
-  /**
-   *
-   * @param {Number} id
-   */
-  async delete(id) {
+    if( !product ) {
+      return null
+    }
+
+    product.title = data.title ? data.title : product.title
+    product.price = data.price ? data.price : product.price
+    product.stock = data.stock ? data.stock : product.stock
+
+    await product.save()
+
+    return product
   }
 }
 

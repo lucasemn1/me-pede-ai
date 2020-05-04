@@ -16,6 +16,9 @@ class ProductTest {
     this.storeMarketAndGettingId()
     this.setMarketAdm()
     this.store()
+    this.update()
+    this.show()
+    this.index()
   }
 
   storeSuperUserAndGetJwt() {
@@ -76,16 +79,49 @@ class ProductTest {
 
       const response = await client.post('product/store')
         .header('accept', 'application/json')
-        .header('Authorization', `Bearer ${this.jwt}`)
+        .header('authorization', `Bearer ${this.jwt}`)
         .header('market_id', this.marketId)
         .send(product.$attributes)
         .end()
 
       response.assertStatus(201)
       response.assertJSONSubset({ title: product.$attributes.title })
+
+      this.productId = response.body.id
     })
   }
 
+  update() {
+    test('Update product', async ({ client }) => {
+      const newProduct = await Factory.model('App/Models/Product').make()
+
+      console.log(newProduct)
+      const response = await client.put(`product/update/${this.productId}`)
+        .header('accept', 'application/json')
+        .header('authorization', `Bearer ${this.jwt}`)
+        .header('market_id', this.marketId)
+        .send(newProduct.$attributes)
+        .end()
+
+      console.log(response.body)
+      response.assertStatus(200)
+    })
+  }
+
+  show() {
+    test('Show product', async ({ client }) =>  {
+      const response = await client.get(`product/${this.productId}`).header('accept', 'application/json').end()
+      console.log(response.body)
+    })
+  }
+
+  index() {
+    test('List products', async ({ client }) => {
+      const response = await client.get(`/products?market=${this.marketId}`)
+
+      // console.log(response)
+    })
+  }
 }
 
 new ProductTest()
