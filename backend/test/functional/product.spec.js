@@ -19,6 +19,7 @@ class ProductTest {
     this.update()
     this.show()
     this.index()
+    this.destroy()
   }
 
   storeSuperUserAndGetJwt() {
@@ -111,15 +112,27 @@ class ProductTest {
   show() {
     test('Show product', async ({ client }) =>  {
       const response = await client.get(`product/${this.productId}`).header('accept', 'application/json').end()
-      console.log(response.body)
+      response.assertStatus(200)
     })
   }
 
   index() {
     test('List products', async ({ client }) => {
-      const response = await client.get(`/products?market=${this.marketId}`)
+      const response = await client.get(`/products?market=${this.marketId}`).end()
 
-      // console.log(response)
+      response.assertStatus(200)
+    })
+  }
+
+  destroy() {
+    test('Delete product', async ({ client }) => {
+      const response = await client.delete(`product/delete/${this.productId}`)
+        .header('accept', 'application/json')
+        .header('authorization', `Bearer ${this.jwt}`)
+        .header('market_id', this.marketId)
+        .end()
+
+      console.log(response)
     })
   }
 }

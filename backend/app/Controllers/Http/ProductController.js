@@ -64,26 +64,6 @@ class ProductController {
     return response.status(200).json(product)
   }
 
-  /**
-   *
-   * @param { Request } ctx.request
-   * @param { Response } ctx.request
-   */
-  async delete({ request, response }) {
-    const product_id = request.params.id
-    const product = await this.productRepository.read(product_id)
-
-    if( !product ) {
-      return response.status(404).json({ message: 'Product was not found.' })
-    }
-
-    if( await product.delete() ) {
-      return response.status(200).json({})
-    }
-    else {
-      return response.status(500).json({ message: 'It was not possible to delete the product' })
-    }
-  }
 
   /**
    *
@@ -106,6 +86,27 @@ class ProductController {
       .offset( ( page - 1 ) * 10 )
 
     return products
+  }
+  
+  /**
+   *
+   * @param { Request } ctx.request
+   * @param { Response } ctx.request
+   */
+  async delete({ request, response }) {
+    const product_id = request.params.id
+    const product = await this.productRepository.read(product_id)
+
+    if( !product ) {
+      return response.status(404).json({ message: 'Product was not found.' })
+    }
+
+    if( await product.delete() ) {
+      return response.status(200).json({})
+    }
+    else {
+      return response.status(500).json({ message: 'It was not possible to delete the product' })
+    }
   }
 }
 
