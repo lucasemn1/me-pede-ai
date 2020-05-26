@@ -5,7 +5,7 @@ class UpdateMarket {
     return {
       cnpj: 'number|max:20|min:13',
       name: 'string|max:254',
-      min_value: 'number',
+      minValue: 'number',
       phone: 'string',
       'address.number': 'number',
       'address.complement': 'string|max:254',

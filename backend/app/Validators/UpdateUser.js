@@ -9,7 +9,7 @@ class UpdateUser {
       email: 'email|max:254',
       password: 'string',
       phone: 'string|max:20',
-      date_of_birth: [rule('dateFormat', 'YYYY/MM/DD')],
+      dateOfBirth: [rule('dateFormat', 'YYYY/MM/DD')],
       'address.number': 'number',
       'address.complement': 'string|max:254',
       'address.neighborhood': 'string|max:254',

@@ -21,8 +21,8 @@ class ProductPictureController {
    * @param {Response} ctx.response
    */
   async store({ request, response, params }) {
-    const marketId = await request.header('market_id')
-    const productId = params.product_id
+    const marketId = await request.header('marketId')
+    const productId = params.productId
     const productRepository = new ProductRepository()
     const product = await productRepository.read(productId)
 
@@ -30,9 +30,9 @@ class ProductPictureController {
         return response.status(404).json({ message: "Product wasn't found" })
     }
 
-    console.log(`${product.market_id} - ${marketId}`);
+    console.log(`${product.marketId} - ${marketId}`);
 
-    if(product.market_id != marketId) {
+    if(product.marketId != marketId) {
         return response.status(401).json({ message: "The informed product does not belong to this marketd" })
     }
 

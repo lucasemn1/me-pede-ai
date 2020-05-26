@@ -95,14 +95,14 @@ class MarketController {
    * @param {Response} ctx.response
    */
   async show ({ params, response }) {
-    const market_id = params.id
-    const market = await this.marketRepository.read(market_id)
+    const marketId = params.id
+    const market = await this.marketRepository.read(marketId)
 
     if( !market ) {
       return response.status(404).json({ message: 'Market was not found' })
     }
 
-    const address = await Address.find(market.address_id)
+    const address = await Address.find(market.addressId)
 
     market.address = address
     market.categories = await market.categories().fetch()
@@ -120,8 +120,8 @@ class MarketController {
    * @param {Response} ctx.response
    */
   async update({ params, request, response }) {
-    const market_id = params.id
-    let market = await this.marketRepository.read(market_id)
+    const marketId = params.id
+    let market = await this.marketRepository.read(marketId)
 
     if( !market ){
       return response.status(404).json({message:"Market wasn't found"})
@@ -131,7 +131,7 @@ class MarketController {
 
     if( request.body.address ){
       const addressRepository = new AddressRepository()
-      await addressRepository.update(market.address_id, request.body.address)
+      await addressRepository.update(market.addressId, request.body.address)
       market.address = await market.address().fetch()
     }
 
@@ -160,14 +160,14 @@ class MarketController {
    * Ok, it's working
    */
   async delete({ params, response }) {
-    const market_id = params.id
-    const market = await this.marketRepository.read(market_id)
+    const marketId = params.id
+    const market = await this.marketRepository.read(marketId)
 
     if( !market ) {
       return response.status(404).json({ message: 'Market was not found' })
     }
 
-    const address = await Address.find(market.address_id)
+    const address = await Address.find(market.addressId)
 
     await market.categories().detach()
     await market.delete()

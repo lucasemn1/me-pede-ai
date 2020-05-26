@@ -68,20 +68,20 @@ class ProductTest {
   setMarketAdm() {
     test('Setting admin of market', async ({ client }) => {
       const market = await Market.find(this.marketId)
-      market.user_id = this.userId
+      market.userId = this.userId
       await market.save()
     })
   }
 
   store() {
     test('Store product', async ({ client }) => {
-      const market_id = this.marketId
-      const product = await Factory.model('App/Models/Product').make({ market_id })
+      const marketId = this.marketId
+      const product = await Factory.model('App/Models/Product').make({ marketId })
 
       const response = await client.post('product/store')
         .header('accept', 'application/json')
         .header('authorization', `Bearer ${this.jwt}`)
-        .header('market_id', this.marketId)
+        .header('marketId', this.marketId)
         .send(product.$attributes)
         .end()
 
@@ -99,7 +99,7 @@ class ProductTest {
       const response = await client.put(`product/update/${this.productId}`)
         .header('accept', 'application/json')
         .header('authorization', `Bearer ${this.jwt}`)
-        .header('market_id', this.marketId)
+        .header('marketId', this.marketId)
         .send(newProduct.$attributes)
         .end()
 
@@ -127,7 +127,7 @@ class ProductTest {
       const response = await client.delete(`product/delete/${this.productId}`)
         .header('accept', 'application/json')
         .header('authorization', `Bearer ${this.jwt}`)
-        .header('market_id', this.marketId)
+        .header('marketId', this.marketId)
         .end()
 
       response.assertStatus(200)

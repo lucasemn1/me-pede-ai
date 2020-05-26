@@ -13,8 +13,8 @@ class UsersSchema extends Schema {
       table.string('password', 60).notNullable()
       table.integer('level').notNullable().default(1)
       table.string('phone', 20).notNullable()
-      table.date('date_of_birth').notNullable()
-      table.integer('address_id').unsigned().references('id').inTable('addresses')
+      table.date('dateOfBirth').notNullable()
+      table.integer('addressId').unsigned().references('id').inTable('addresses')
       table.timestamps()
     })
   }

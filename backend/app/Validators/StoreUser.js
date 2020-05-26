@@ -13,7 +13,7 @@ class StoreUser {
       email: 'required|email|unique:users,email',
       password: 'required|string',
       phone: 'required|string',
-      date_of_birth: [rule('dateFormat', 'YYYY/MM/DD')],
+      dateOfBirth: [rule('dateFormat', 'YYYY/MM/DD')],
       'address.number': 'required|number',
       'address.complement': 'required|string|max:254',
       'address.neighborhood': 'required|string|max:254',

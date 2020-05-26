@@ -13,11 +13,11 @@ class ProductMarket {
    * @param {Function} next
    */
   async handle ({ request, response, auth }, next) {
-    const market_id = request.header('market_id')
-    const market = await Market.find(market_id)
+    const marketId = request.header('marketId')
+    const market = await Market.find(marketId)
     const product = await Product.find(request.params.id)
 
-    if( product.market_id === market.id ) {
+    if( product.marketId === market.id ) {
       await next()
     }
     else {

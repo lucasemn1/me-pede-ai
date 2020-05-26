@@ -13,7 +13,7 @@ class ProductSchema extends Schema {
       table.string('picture').notNullable()
       table.integer('stock', 4).notNullable()
 
-      table.integer('market_id').unsigned().references('id').inTable('markets')
+      table.integer('marketId').unsigned().references('id').inTable('markets')
 
       table.timestamps()
     })

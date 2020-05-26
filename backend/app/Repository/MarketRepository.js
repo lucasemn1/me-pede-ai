@@ -10,7 +10,7 @@ class MarketRepository {
     const market = new Market()
     market.cnpj = data.cnpj
     market.name = data.name
-    market.min_value = data.min_value
+    market.minValue = data.minValue
     market.picture = 'default.jpg'
     market.phone = data.phone
 
@@ -43,8 +43,8 @@ class MarketRepository {
   async update(market, data){
     market.cnpj = data.cnpj || market.cnpj
     market.name = data.name || market.name
-    market.min_value = data.min_value || market.min_value
-    market.is_open = data.is_open == undefined ? market.is_open: data.is_open
+    market.minValue = data.minValue || market.minValue
+    market.isOpen = data.isOpen == undefined ? market.isOpen: data.isOpen
     market.picture = data.picture || market.picture
     market.phone = data.phone || market.phone
 

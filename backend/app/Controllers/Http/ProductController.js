@@ -16,8 +16,8 @@ class ProductController {
    */
   async store({ request, response, auth }) {
     const data = request.body
-    const market_id = request.header('market_id')
-    data.market_id = market_id
+    const marketId = request.header('marketId')
+    data.marketId = marketId
 
     const product = await this.productRepository.create(data)
 
@@ -35,11 +35,11 @@ class ProductController {
    */
   async update({ request, response }) {
     const data = request.body
-    const market_id = request.header('market_id')
-    const product_id = request.params.id
-    data.market_id = market_id
+    const marketId = request.header('marketId')
+    const productId = request.params.id
+    data.marketId = marketId
 
-    const product = await this.productRepository.update(data, product_id)
+    const product = await this.productRepository.update(data, productId)
 
     if( !product ) {
       return response.status(404).json({ message: 'Product was not found.'})
@@ -54,8 +54,8 @@ class ProductController {
    * @param { Response } ctx.request
    */
   async show({ request, response }) {
-    const product_id = request.params.id
-    const product = await this.productRepository.read(product_id)
+    const productId = request.params.id
+    const product = await this.productRepository.read(productId)
 
     if( !product ) {
       return response.status(404).json({ message: 'Product was not found.' })
@@ -81,7 +81,7 @@ class ProductController {
         'products.stock'
       ])
       .from('products')
-      .where('products.market_id', '=', market)
+      .where('products.marketId', '=', market)
       .limit(10)
       .offset( ( page - 1 ) * 10 )
 
@@ -94,8 +94,8 @@ class ProductController {
    * @param { Response } ctx.request
    */
   async delete({ request, response }) {
-    const product_id = request.params.id
-    const product = await this.productRepository.read(product_id)
+    const productId = request.params.id
+    const product = await this.productRepository.read(productId)
 
     if( !product ) {
       return response.status(404).json({ message: 'Product was not found.' })

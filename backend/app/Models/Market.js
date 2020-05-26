@@ -5,21 +5,21 @@ const Model = use('Model')
 
 class Market extends Model {
   address() {
-    return this.belongsTo('App/Models/Address')
+    return this.belongsTo('App/Models/Address', 'addressId', 'id')
   }
 
   categories() {
     return this.belongsToMany(
       'App/Models/Category',
-      'market_id',
-      'category_id',
+      'marketId',
+      'categoryId',
       'id',
       'id'
-    ).pivotTable('categories_markets')
+    ).pivotTable('categoriesMarkets')
   }
 
   user() {
-    return this.belongsTo('App/Models/User')
+    return this.belongsTo('App/Models/User', 'userId', 'id')
   }
 }
 

@@ -5,7 +5,7 @@ const Model = use('Model')
 
 class Product extends Model {
   market() {
-    return this.belongsTo('App/Models/Market')
+    return this.belongsTo('App/Models/Market', 'marketId', 'id')
   }
 }
 

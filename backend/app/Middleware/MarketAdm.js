@@ -14,13 +14,13 @@ class MarketAdm {
    */
   async handle ({ request, response, auth }, next) {
     const user = await auth.getUser()
-    const market_id = request.header('market_id')
-    const market = await Market.find(market_id)
+    const marketId = request.header('marketId')
+    const market = await Market.find(marketId)
 
     if( !market ) {
       return response.status(404).json({ message: "Market wasn't found." })
     }
-    if( market.user_id === user.id ) {
+    if( market.userId === user.id ) {
       await next()
     }
     else {

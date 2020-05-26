@@ -10,13 +10,13 @@ class MarketSchema extends Schema {
 
       table.string('cnpj', 20).notNullable().unique()
       table.string('name', 254).notNullable()
-      table.decimal('min_value', 6, 2).notNullable()
-      table.boolean('is_open').default(false)
+      table.decimal('minValue', 6, 2).notNullable()
+      table.boolean('isOpen').default(false)
       table.string('picture', 254).notNullable()
       table.string('phone', 20).notNullable()
 
-      table.integer('address_id').unsigned().references('id').inTable('addresses')
-      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('SET NULL')
+      table.integer('addressId').unsigned().references('id').inTable('addresses')
+      table.integer('userId').unsigned().references('id').inTable('users').onDelete('SET NULL')
 
       table.timestamps()
     })

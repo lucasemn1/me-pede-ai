@@ -113,5 +113,5 @@ Route.get('/product/:id', 'ProductController.show')
 
 //Product picture
 Route
-  .post('/product/:product_id/store/picture/', 'ProductPictureController.store')
+  .post('/product/:productId/store/picture/', 'ProductPictureController.store')
   .middleware(['auth', 'marketAdm'])

@@ -5,7 +5,7 @@ class StoreMarket {
     return {
       cnpj: 'required|number|max:20|min:13',
       name: 'required|string|max:254',
-      min_value: 'required|number',
+      minValue: 'required|number',
       phone: 'required|string',
       'address.number': 'required|number',
       'address.complement': 'required|string|max:254',

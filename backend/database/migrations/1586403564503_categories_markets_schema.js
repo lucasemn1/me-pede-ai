@@ -5,18 +5,18 @@ const Schema = use('Schema')
 
 class CategoriesMarketsSchema extends Schema {
   up () {
-    this.create('categories_markets', (table) => {
+    this.create('categoriesMarkets', (table) => {
       table.increments()
 
-      table.integer('category_id').unsigned().references('id').inTable('categories')
-      table.integer('market_id').unsigned().references('id').inTable('markets')
+      table.integer('categoryId').unsigned().references('id').inTable('categories')
+      table.integer('marketId').unsigned().references('id').inTable('markets')
 
       table.timestamps()
     })
   }
 
   down () {
-    this.drop('categories_markets')
+    this.drop('categoriesMarkets')
   }
 }
 

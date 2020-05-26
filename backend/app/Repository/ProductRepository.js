@@ -14,7 +14,7 @@ class ProductRepository {
     product.price = data.price
     product.stock = data.stock
     product.picture = 'default.jpg'
-    product.market_id = data.market_id
+    product.marketId = data.marketId
 
     if( await product.save() ) {
       return product

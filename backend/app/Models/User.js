@@ -41,7 +41,7 @@ class User extends Model {
   }
 
   address() {
-    return this.belongsTo('App/Models/Address')
+    return this.belongsTo('App/Models/Address', 'addressId', 'id')
   }
 }
 
