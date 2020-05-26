@@ -13,5 +13,4 @@ database/*.sqlite
 .idea
 
 # Ignore uploaded files
-tmp/uploads/markets/*
-tmp/uploads/users/*
+tmp/uploads/*

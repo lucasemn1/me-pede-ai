@@ -83,6 +83,7 @@ Route
 Route
   .post('/market/store/picture/:marketId', 'MarketPictureController.store')
   .middleware(['authAsSuperUser'])
+
 Route
   .put('/market/update/picture/:marketId', 'MarketPictureController.update')
   .middleware(['authAsSuperUser'])
@@ -108,3 +109,9 @@ Route.delete('/product/delete/:id', 'ProductController.delete')
 Route.get('/products/:page?', 'ProductController.index')
 
 Route.get('/product/:id', 'ProductController.show')
+
+
+//Product picture
+Route
+  .post('/product/:product_id/store/picture/', 'ProductPictureController.store')
+  .middleware(['auth', 'marketAdm'])

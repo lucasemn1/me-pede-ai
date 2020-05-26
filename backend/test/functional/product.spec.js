@@ -96,7 +96,6 @@ class ProductTest {
     test('Update product', async ({ client }) => {
       const newProduct = await Factory.model('App/Models/Product').make()
 
-      console.log(newProduct)
       const response = await client.put(`product/update/${this.productId}`)
         .header('accept', 'application/json')
         .header('authorization', `Bearer ${this.jwt}`)
@@ -104,7 +103,6 @@ class ProductTest {
         .send(newProduct.$attributes)
         .end()
 
-      console.log(response.body)
       response.assertStatus(200)
     })
   }
@@ -132,7 +130,7 @@ class ProductTest {
         .header('market_id', this.marketId)
         .end()
 
-      console.log(response)
+      response.assertStatus(200)
     })
   }
 }
