@@ -1,0 +1,31 @@
+{
+   "name": "me-pede-ai",
+   "version": "1.0.0",
+   "description": "Sistema de pedidos online",
+   "main": "index.js",
+   "scripts": {
+      "start-dev": "ts-node-dev --respawn --ignore-watch node_modules --no-notify src/server/index.ts",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "typeorm": "ts-node ./node_modules/.bin/typeorm",
+      "start": "ts-node src/index.ts"
+   },
+   "author": "lucasemn1",
+   "license": "ISC",
+   "dependencies": {
+      "bcrypt": "^5.0.0",
+      "dotenv": "^8.2.0",
+      "express": "^4.17.1",
+      "mysql": "^2.18.1",
+      "reflect-metadata": "^0.1.10"
+   },
+   "devDependencies": {
+      "@types/bcrypt": "^3.0.0",
+      "@types/dotenv": "^8.2.0",
+      "@types/express": "^4.17.7",
+      "@types/node": "^8.0.29",
+      "ts-node": "3.3.0",
+      "ts-node-dev": "^1.0.0-pre.57",
+      "typeorm": "0.2.25",
+      "typescript": "3.3.3333"
+   }
+}
