@@ -39,7 +39,7 @@ $ adonis serve --dev
 
 ## 💾 Modelo relacional do banco de dados.
 
-![GitHub Logo](https://raw.githubusercontent.com/lucasemn1/me-pede/master/backend/public/database_model.png)
+![GitHub Logo](https://github.com/lucasemn1/me-pede/blob/master/adonis_old/public/database_model.png)
 
 <hr/>
 

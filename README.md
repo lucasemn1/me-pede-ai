@@ -2,46 +2,17 @@
 
 ## 💻 Tecnologias 
 * NodeJS
-* Adonis
-* SQLite3 (em ambiente de desenvolvimento)
+* TypeScript
+* MySQL
 
-## ❗Pré-requisitos
-* [Node.JS](https://nodejs.org/en/)
-* [CLI do AdonisJS](https://adonisjs.com/docs/4.1/installation)
+## Sobre o projeto
 
-## 📝 Instalação
-1. Clone o projeto
-```
-$ git clone https://github.com/lucasemn1/me-pede
-```
+### Resumo
+O Me Pede Aí trata-se de um aplicativo de delivery desenvolvido com foco principal em estudos de desenvolvimento mobile com a stack JavaScript.
 
-2. Instale as dependências
-```
-$ npm install
-```
+### O reboot
+Assim como o mundo da fantasia, as vezes as coisas necessitam de um recomeço. Inicialmente o Me Pede Aí chamava-se Me Pede e estava sendo desenvolvido com Javascript com o auxílio do framework AdonisJS. Agora tem como linguagem de programação principal o Typescript, principalmente devido a suas tipagens e a compatibilidade com o TypeORM, que auxiliarão bastante no processo de criação do sistema.
 
-3. Crie um aquivo "**.env**" na pasta "**/backend**", copie o conteúdo do arquivo "**.env.exemple**" e cole no aquivo "**.env**".
-
-4. Execute as migrations
-```
-$ adonis migration:run
-```
-
-5. Gere a key
-```
-$ adonis key:generate
-```
-
-6. Inicie o servidor
-```
-$ adonis serve --dev
-```
-
-## 💾 Modelo relacional do banco de dados.
-
-![GitHub Logo](https://raw.githubusercontent.com/lucasemn1/me-pede/master/backend/public/database_model.png)
-
-<hr/>
 
 ##### Desenvolvido por Lucas Emanuel Nascimento Nóbrega Dias 😁.
 ##### Visite meu [Linkedin! 🌐🗯](https://www.linkedin.com/in/lucas-emn/) 
