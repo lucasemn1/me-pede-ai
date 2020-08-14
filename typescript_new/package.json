@@ -12,9 +12,11 @@
    "author": "lucasemn1",
    "license": "ISC",
    "dependencies": {
+      "@types/express-validator": "^3.0.0",
       "bcrypt": "^5.0.0",
       "dotenv": "^8.2.0",
       "express": "^4.17.1",
+      "express-validator": "^6.6.1",
       "mysql": "^2.18.1",
       "reflect-metadata": "^0.1.10"
    },
