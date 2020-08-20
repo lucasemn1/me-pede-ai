@@ -1,5 +1,4 @@
-import { body, validationResult } from 'express-validator';
-import { Request, NextFunction, Response, response } from 'express';
+import { body } from 'express-validator';
 
 export class UserValidations {
   public static store = [

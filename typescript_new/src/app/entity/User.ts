@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToOne, JoinColumn } from "typeorm";
-import * as bcrypt from 'bcrypt';
 import { Address } from "./Addess";
+import { hashPassword as globalHashPassword } from "../util/util";
 
 @Entity({ name: 'users' })
 export class User {
@@ -10,14 +10,14 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   name: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
 
   @Column({ type: 'tinyint', default: 1 })
-  level: number;
+  level?: number;
 
-  @Column({ type: 'varchar', length: 255 })
-  avatar: string;
+  @Column({ type: 'varchar', length: 255, default: 'default.jpg' })
+  avatar?: string;
 
   @Column({ type: 'datetime' })
   dateOfBirth: string;
@@ -31,6 +31,6 @@ export class User {
 
   @BeforeInsert()
   hashPassword() {
-    this.password = bcrypt.hashSync(this.password, 10);
+    this.password = globalHashPassword(this.password);
   }
 }
