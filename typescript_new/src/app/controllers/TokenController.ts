@@ -16,9 +16,9 @@ export class TokenController {
 
     try {
       const user = await connection.getRepository(User)
-        .createQueryBuilder()
-        .where('email LIKE :email', { email })
-        .getOne();
+            .createQueryBuilder()
+            .where('email LIKE :email', { email })
+            .getOne();
 
       await connection.close();
 

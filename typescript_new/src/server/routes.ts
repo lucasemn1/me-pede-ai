@@ -16,6 +16,6 @@ routes.get('/', (request, response) => {
 
 routes.post('/user', UserValidations.store, ValidateRequestMiddleware.valide, UserController.store);
 
-routes.post('/user/token', TokenValidations.store, TokenController.store);
+routes.post('/user/token', TokenValidations.store, ValidateRequestMiddleware.valide, TokenController.store);
 
 export default routes;
