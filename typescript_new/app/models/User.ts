@@ -5,12 +5,12 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BeforeInsert,
-  OneToOne,
-  JoinColumn,
   BeforeUpdate,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne
 } from 'typeorm';
+import { Market } from './Market';
 
 @Entity({ name: 'users' })
 export class User {
@@ -35,9 +35,8 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   password: string;
 
-  @OneToOne(() => Address)
-  @JoinColumn()
-  address: Address;
+  @ManyToOne(() => Market, market => market.user)
+  markets: Market[];
 
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
   createdAt: Date;

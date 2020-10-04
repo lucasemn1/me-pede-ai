@@ -35,47 +35,80 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var typeorm_1 = require("typeorm");
-var User_1 = require("../entity/User");
+var User_1 = require("../models/User");
+var UserRepository_1 = require("../repository/UserRepository");
+var JWTUtil_1 = require("../../util/JWTUtil");
 var UserController = /** @class */ (function () {
     function UserController() {
     }
-    UserController.store = function (request, response) {
+    UserController.store = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var connection, data, user, err_1;
+            var _a, name, email, password, userToSave, result;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        _a = req.body, name = _a.name, email = _a.email, password = _a.password;
+                        userToSave = new User_1.User();
+                        userToSave.name = name;
+                        userToSave.email = email;
+                        userToSave.password = password;
+                        return [4 /*yield*/, UserRepository_1.default.create(userToSave)];
+                    case 1:
+                        result = _b.sent();
+                        if (typeof result === 'boolean') {
+                            return [2 /*return*/, res.status(201).json()];
+                        }
+                        return [2 /*return*/, res.status(500).json({ err: result })];
+                }
+            });
+        });
+    };
+    UserController.get = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var token, user, userDataToSend;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, typeorm_1.createConnection()];
+                    case 0:
+                        token = req.headers.authorization;
+                        return [4 /*yield*/, JWTUtil_1.default.getUser(token)];
                     case 1:
-                        connection = _a.sent();
-                        _a.label = 2;
-                    case 2:
-                        _a.trys.push([2, 5, , 7]);
-                        data = request.body;
-                        user = new User_1.User();
-                        user.name = data.name;
-                        user.email = data.email;
-                        user.password = data.password;
-                        user.dateOfBirth = data.dateOfBirth;
-                        return [4 /*yield*/, connection.manager.save(user)];
-                    case 3:
                         user = _a.sent();
-                        return [4 /*yield*/, connection.close()];
-                    case 4:
-                        _a.sent();
-                        return [2 /*return*/, response.status(201).json(user)];
-                    case 5:
-                        err_1 = _a.sent();
-                        return [4 /*yield*/, connection.close()];
-                    case 6:
-                        _a.sent();
-                        return [2 /*return*/, response.status(500).json({ error: err_1 })];
-                    case 7: return [2 /*return*/];
+                        if (user) {
+                            userDataToSend = {
+                                name: user.name,
+                                email: user.email,
+                            };
+                            return [2 /*return*/, res.status(200).json({ user: userDataToSend })];
+                        }
+                        return [2 /*return*/, res.status(404).json({ err: 'User was not found.' })];
+                }
+            });
+        });
+    };
+    UserController.delete = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var token, user, result;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        token = req.headers.authorization;
+                        return [4 /*yield*/, JWTUtil_1.default.getUser(token)];
+                    case 1:
+                        user = _a.sent();
+                        if (!user) return [3 /*break*/, 3];
+                        return [4 /*yield*/, UserRepository_1.default.deleteUserById(user.id)];
+                    case 2:
+                        result = _a.sent();
+                        if (result) {
+                            return [2 /*return*/, res.status(200).json()];
+                        }
+                        return [2 /*return*/, res.status(500).json()];
+                    case 3: return [2 /*return*/, res.status(404).json({ err: 'User was not found.' })];
                 }
             });
         });
     };
     return UserController;
 }());
-exports.UserController = UserController;
+exports.default = UserController;
 //# sourceMappingURL=UserController.js.map

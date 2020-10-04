@@ -1,13 +1,15 @@
+import * as bcrypt from 'bcrypt';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToOne,
   BeforeInsert,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
-import * as bcrypt from 'bcrypt';
 import { Address } from './Addess';
+import { User } from './User';
+import { Image } from './Image';
 
 @Entity({ name: 'markets' })
 export class Market {
@@ -35,12 +37,18 @@ export class Market {
   @Column()
   password: string;
 
+  @OneToMany((type) => User, user => user.markets)
+  user: User;
+
+  @OneToMany((type) => Image, images => images.market)
+  images: Image[]; 
+
   @BeforeInsert()
   hashPassword() {
     this.password = bcrypt.hashSync(this.password, 10);
   }
 
-  @OneToOne((type) => Address)
+  @OneToMany((type) => Address, addresses => addresses.market)
   @JoinColumn()
-  address: Address;
+  addresses: Address;
 }

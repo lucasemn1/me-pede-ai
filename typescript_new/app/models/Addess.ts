@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Market } from './Market';
 
 @Entity({ name: 'addresses' })
 export class Address {
@@ -28,4 +29,13 @@ export class Address {
 
   @Column()
   description: string;
+  
+  @Column()
+  lat: number 
+
+  @Column()
+  lgt: number;
+
+  @ManyToOne(() => Market, market => market.addresses)
+  market: Market
 }

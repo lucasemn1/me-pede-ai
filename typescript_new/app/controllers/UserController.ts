@@ -8,12 +8,14 @@ class UserController {
     const {
       name,
       email,
+      bornDate,
       password,
-    }: { name: string; email: string; password: string } = req.body;
+    }: { name: string; email: string; bornDate: string, password: string } = req.body;
 
     const userToSave = new User();
     userToSave.name = name;
     userToSave.email = email;
+    userToSave.bornDate = bornDate;
     userToSave.password = password;
 
     const result = await UserRepository.create(userToSave);
@@ -31,12 +33,7 @@ class UserController {
     const user = await JWTUtil.getUser(token);
 
     if (user) {
-      const userDataToSend = {
-        name: user.name,
-        email: user.email,
-      };
-
-      return res.status(200).json({ user: userDataToSend });
+      return res.status(200).json({ user });
     }
 
     return res.status(404).json({ err: 'User was not found.' });
