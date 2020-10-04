@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { validationResult } from "express-validator";
 
 export class ValidateRequestMiddleware {
-  public static valide(request: Request, response: Response, next: NextFunction) {
+  public static valide(request: Request, response: Response, next: NextFunction): Response | void {
     const erros = validationResult(request);
 
     if(erros.isEmpty()) {

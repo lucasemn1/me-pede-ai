@@ -1,6 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, BeforeInsert, JoinColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  BeforeInsert,
+  JoinColumn,
+} from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { Address } from "./Addess";
+import { Address } from './Addess';
 
 @Entity({ name: 'markets' })
 export class Market {
@@ -17,7 +24,7 @@ export class Market {
   minDeliveryAmount: number;
 
   @Column({ type: 'boolean', default: false })
-  isOpen: boolean
+  isOpen: boolean;
 
   @Column()
   picture: string;
@@ -33,7 +40,7 @@ export class Market {
     this.password = bcrypt.hashSync(this.password, 10);
   }
 
-  @OneToOne(type => Address)
+  @OneToOne((type) => Address)
   @JoinColumn()
   address: Address;
 }

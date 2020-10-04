@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as path from 'path';
 import { UserValidations } from '../app/validators/UserValidations';
 import { UserController } from '../app/controllers/UserController';
-import { ValidateRequestMiddleware } from '../app/middlewarers/ValidateRequestMiddleware';
+import { ValidateRequestMiddleware } from '../app/middlewares/ValidateRequestMiddleware';
 import { TokenController } from '../app/controllers/TokenController';
 import { TokenValidations } from '../app/validators/TokenValidations';
 
@@ -16,6 +16,6 @@ routes.get('/', (request, response) => {
 
 routes.post('/user', UserValidations.store, ValidateRequestMiddleware.valide, UserController.store);
 
-routes.post('/user/token', TokenValidations.store, ValidateRequestMiddleware.valide, TokenController.store);
+routes.post('/user/token', TokenValidations.store, ValidateRequestMiddleware.valide, TokenController.get);
 
 export default routes;
