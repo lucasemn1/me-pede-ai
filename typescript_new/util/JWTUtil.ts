@@ -1,7 +1,15 @@
 import * as jwt from 'jsonwebtoken';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
 import UserRepository from '../app/repository/UserRepository';
 import JWTObject from '../interfaces/JWTObject';
 import { User } from '../app/models/User';
+
+if(!process.env.PRIVATE_KEY) {
+  dotenv.config({
+    path: path.resolve(__dirname, '..', '.env')
+  });
+}
 
 class JWTUtil {
   static expireTime = 60*60*24;

@@ -39,12 +39,12 @@ export class User {
   @JoinColumn()
   address: Address;
 
-  @CreateDateColumn({ type: 'timestamp without time zone', default: 'NOW()' })
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
   createdAt: Date;
 
   @UpdateDateColumn({
-    type: 'timestamp without time zone',
-    onUpdate: 'NOW()',
+    type: 'timestamp',
+    onUpdate: 'CURRENT_TIMESTAMP',
     nullable: true,
   })
   updatedAt: Date;

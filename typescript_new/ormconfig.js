@@ -7,11 +7,9 @@ if (!process.env.NODE_ENV) {
 const databaseConfig = {
   test: {
     type: "mysql",
-    // host: process.env.HOST,
-    // port: 3306,
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE,
+    database: process.env.DB_TESTS_DATABASE,
     synchronize: true,
     logging: false,
     entities: ["app/models/**/*.ts"],
@@ -26,8 +24,6 @@ const databaseConfig = {
 
   development: {
     type: "mysql",
-    // host: process.env.HOST,
-    // port: 3306,
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
@@ -45,8 +41,6 @@ const databaseConfig = {
 
   production: {
     type: "mysql",
-    // host: process.env.HOST,
-    // port: 3306,
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,

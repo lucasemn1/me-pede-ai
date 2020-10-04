@@ -8,6 +8,7 @@ const lines = {
   NODE_ENV: '',
   DB_HOST: '',
   DB_DATABASE: '',
+  DB_TESTS_DATABASE: '',
   DB_USER: '',
   DB_PASSWORD: '',
 }
