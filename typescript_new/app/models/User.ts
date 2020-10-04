@@ -1,3 +1,5 @@
+import { Address } from './Addess';
+import PasswordUtil from '../../util/PasswordUtil';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -9,8 +11,6 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Address } from './Addess';
-import PasswordUtil from '../../util/PasswordUtil';
 
 @Entity({ name: 'users' })
 export class User {

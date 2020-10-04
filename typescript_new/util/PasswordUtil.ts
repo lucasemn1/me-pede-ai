@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcrypt';
 
 class PasswordUtil {
-  static hashPassword(password: string): string{
+  static hashPassword(password: string) {
     return bcrypt.hashSync(password, 10);
   }
 

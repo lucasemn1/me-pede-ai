@@ -3,7 +3,7 @@ import { User } from '../models/User';
 import PasswordUtil from '../../util/PasswordUtil';
 
 class UserRepository {
-  static async getUserFromLogin(email: string, password: string): Promise<User> {
+  static async getUserFromLogin(email: string, password: string) {
     const connection = await createConnection();
 
     try {
@@ -26,7 +26,7 @@ class UserRepository {
     }
   }
 
-  static async getUserById(id: number): Promise<User> {
+  static async getUserById(id: number) {
     const connection = await createConnection();
     
     try {
@@ -45,7 +45,7 @@ class UserRepository {
     }
   }
 
-  static async create(user: User): Promise<boolean> {
+  static async create(user: User) {
     const connection = await createConnection();
 
     try {
@@ -62,7 +62,7 @@ class UserRepository {
     }
   }
 
-  static async deleteUserById(id: number): Promise<boolean> {
+  static async deleteUserById(id: number) {
     const connection = await createConnection();
 
     try {
