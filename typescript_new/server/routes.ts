@@ -1,21 +1,60 @@
 import * as express from 'express';
 import * as path from 'path';
-import { UserValidations } from '../app/validators/UserValidations';
-import { UserController } from '../app/controllers/UserController';
-import { ValidateRequestMiddleware } from '../app/middlewarers/ValidateRequestMiddleware';
-import { TokenController } from '../app/controllers/TokenController';
-import { TokenValidations } from '../app/validators/TokenValidations';
+
+//Validatores
+import UserValidations from '../app/validators/UserValidations';
+import JWTValidations from '../app/validators/JWTValidations';
+
+//Controllers
+import UserController from '../app/controllers/UserController';
+import JWTController from '../app/controllers/JWTController';
+import MarketController from '../app/controllers/MarketController';
+
+// Middlewares
+import { ValidateRequestMiddleware } from '../app/middlewares/ValidateRequestMiddleware';
 
 const routes = express.Router();
 
-routes.get('/public', express.static(path.resolve(__dirname, '..', '..', 'public')));
+routes.get(
+  '/public',
+  express.static(path.resolve(__dirname, '..', '..', 'public'))
+);
 
-routes.get('/', (request, response) => {
-  return response.send("Hello World");
-});
+routes.get(
+  '/token',
+  JWTValidations.store,
+  ValidateRequestMiddleware.validate,
+  JWTController.getToken
+)
 
-routes.post('/user', UserValidations.store, ValidateRequestMiddleware.valide, UserController.store);
+routes.post(
+  '/user',
+  UserValidations.store,
+  ValidateRequestMiddleware.validate,
+  UserController.store
+);
 
-routes.post('/user/token', TokenValidations.store, ValidateRequestMiddleware.valide, TokenController.store);
+routes.get(
+  '/user',
+  UserValidations.get,
+  ValidateRequestMiddleware.validate,
+  UserController.get
+);
+
+routes.delete(
+  '/user',
+  UserValidations.delete,
+  ValidateRequestMiddleware.validate,
+  UserController.delete
+);
+
+// MARKET ----------------------------------------------------
+
+routes.post(
+  '/market',
+  MarketController.store,
+)
+
+
 
 export default routes;

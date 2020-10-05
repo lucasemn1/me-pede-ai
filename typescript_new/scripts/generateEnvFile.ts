@@ -1,13 +1,14 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { generatePrivateKey } from '../util/keys';
+import KeysUtil from '../util/KeysUtil';
 
 const lines = {
   HOST: '',
-  PRIVATE_KEY: generatePrivateKey(),
+  PRIVATE_KEY: KeysUtil.generatePrivateKey(),
   NODE_ENV: '',
   DB_HOST: '',
   DB_DATABASE: '',
+  DB_TESTS_DATABASE: '',
   DB_USER: '',
   DB_PASSWORD: '',
 }
